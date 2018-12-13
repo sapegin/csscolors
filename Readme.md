@@ -1,4 +1,4 @@
-# All CSS colors on a single page
+# All CSS named colors on a single page
 
 **[Open the page](https://sapegin.github.io/csscolors/)**
 
