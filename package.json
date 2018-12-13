@@ -22,8 +22,7 @@
     "lint:css": "stylelint '**/*.html'",
     "format": "prettier --write \"**/*.html\"",
     "posttest": "npm run format",
-    "precommit": "lint-staged",
-    "deploy": "gh-pages -s index.html"
+    "precommit": "lint-staged"
   },
   "keywords": [],
   "dependencies": {},
@@ -32,7 +31,6 @@
     "eslint": "^5.10.0",
     "eslint-config-tamia": "^6.0.2",
     "eslint-plugin-html": "^5.0.0",
-    "gh-pages": "^2.0.1",
     "husky": "^1.2.0",
     "lint-staged": "^8.1.0",
     "prettier": "^1.15.3",
