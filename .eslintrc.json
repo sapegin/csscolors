@@ -1,0 +1,4 @@
+{
+  "extends": "tamia",
+  "plugins": ["html"]
+}

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>CSS colors</title>
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1, shrink-to-fit=no"
+		/>
+		<style>
+			:root {
+				--text-dark: #333;
+				--text-light: #efefef;
+			}
+			body {
+				margin: 0;
+				padding: 0;
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+				font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+					'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+					'Helvetica Neue', sans-serif;
+			}
+			.footer {
+				grid-column: 1 / -1;
+				padding: 16px;
+				text-align: center;
+				color: var(--text-dark);
+			}
+			a:link,
+			a:visited {
+				color: darkslateblue;
+			}
+			a:hover,
+			a:active,
+			a:focus {
+				color: orangered;
+			}
+		</style>
+		<template id="template-swatch">
+			<style>
+				:host {
+					display: block;
+					padding: 48px 16px;
+					background-color: var(--color);
+					color: var(--text-color);
+				}
+			</style>
+			<slot></slot>
+		</template>
+		<script>
+			// Color functions are from https://github.com/bgrins/TinyColor
+			function hexToRgb(hex) {
+				const match = /^([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$/.exec(
+					hex
+				);
+				return {
+					r: parseInt(match[1], 16),
+					g: parseInt(match[2], 16),
+					b: parseInt(match[3], 16),
+				};
+			}
+
+			function isDark(rgb) {
+				return getBrightness(rgb) < 128;
+			}
+
+			function getBrightness(rgb) {
+				return (rgb.r * 299 + rgb.g * 587 + rgb.b * 114) / 1000;
+			}
+
+			customElements.define(
+				'color-swatch',
+				class extends HTMLElement {
+					constructor() {
+						super();
+
+						this.attachShadow({ mode: 'open' });
+
+						const template = document.getElementById('template-swatch');
+						this.shadowRoot.appendChild(template.content.cloneNode(true));
+
+						setTimeout(this.setColors.bind(this));
+					}
+
+					setColors() {
+						const color = this.getAttribute('data-color');
+						const textColor = isDark(hexToRgb(color))
+							? 'var(--text-light)'
+							: 'var(--text-dark)';
+						this.style.setProperty('--color', `#${color}`);
+						this.style.setProperty('--text-color', textColor);
+					}
+				}
+			);
+		</script>
+	</head>
+	<body>
+		<color-swatch data-color="000000">black</color-swatch>
+		<color-swatch data-color="c0c0c0">silver</color-swatch>
+		<color-swatch data-color="808080">gray</color-swatch>
+		<color-swatch data-color="ffffff">white</color-swatch>
+		<color-swatch data-color="800000">maroon</color-swatch>
+		<color-swatch data-color="ff0000">red</color-swatch>
+		<color-swatch data-color="800080">purple</color-swatch>
+		<color-swatch data-color="ff00ff">fuchsia</color-swatch>
+		<color-swatch data-color="008000">green</color-swatch>
+		<color-swatch data-color="00ff00">lime</color-swatch>
+		<color-swatch data-color="808000">olive</color-swatch>
+		<color-swatch data-color="ffff00">yellow</color-swatch>
+		<color-swatch data-color="000080">navy</color-swatch>
+		<color-swatch data-color="0000ff">blue</color-swatch>
+		<color-swatch data-color="008080">teal</color-swatch>
+		<color-swatch data-color="00ffff">aqua</color-swatch>
+		<color-swatch data-color="ffa500">orange</color-swatch>
+		<color-swatch data-color="f0f8ff">aliceblue</color-swatch>
+		<color-swatch data-color="faebd7">antiquewhite</color-swatch>
+		<color-swatch data-color="7fffd4">aquamarine</color-swatch>
+		<color-swatch data-color="f0ffff">azure</color-swatch>
+		<color-swatch data-color="f5f5dc">beige</color-swatch>
+		<color-swatch data-color="ffe4c4">bisque</color-swatch>
+		<color-swatch data-color="ffebcd">blanchedalmond</color-swatch>
+		<color-swatch data-color="8a2be2">blueviolet</color-swatch>
+		<color-swatch data-color="a52a2a">brown</color-swatch>
+		<color-swatch data-color="deb887">burlywood</color-swatch>
+		<color-swatch data-color="5f9ea0">cadetblue</color-swatch>
+		<color-swatch data-color="7fff00">chartreuse</color-swatch>
+		<color-swatch data-color="d2691e">chocolate</color-swatch>
+		<color-swatch data-color="ff7f50">coral</color-swatch>
+		<color-swatch data-color="6495ed">cornflowerblue</color-swatch>
+		<color-swatch data-color="fff8dc">cornsilk</color-swatch>
+		<color-swatch data-color="dc143c">crimson</color-swatch>
+		<color-swatch data-color="00008b">darkblue</color-swatch>
+		<color-swatch data-color="008b8b">darkcyan</color-swatch>
+		<color-swatch data-color="b8860b">darkgoldenrod</color-swatch>
+		<color-swatch data-color="a9a9a9">darkgray</color-swatch>
+		<color-swatch data-color="006400">darkgreen</color-swatch>
+		<color-swatch data-color="a9a9a9">darkgrey</color-swatch>
+		<color-swatch data-color="bdb76b">darkkhaki</color-swatch>
+		<color-swatch data-color="8b008b">darkmagenta</color-swatch>
+		<color-swatch data-color="556b2f">darkolivegreen</color-swatch>
+		<color-swatch data-color="ff8c00">darkorange</color-swatch>
+		<color-swatch data-color="9932cc">darkorchid</color-swatch>
+		<color-swatch data-color="8b0000">darkred</color-swatch>
+		<color-swatch data-color="e9967a">darksalmon</color-swatch>
+		<color-swatch data-color="8fbc8f">darkseagreen</color-swatch>
+		<color-swatch data-color="483d8b">darkslateblue</color-swatch>
+		<color-swatch data-color="2f4f4f">darkslategray</color-swatch>
+		<color-swatch data-color="2f4f4f">darkslategrey</color-swatch>
+		<color-swatch data-color="00ced1">darkturquoise</color-swatch>
+		<color-swatch data-color="9400d3">darkviolet</color-swatch>
+		<color-swatch data-color="ff1493">deeppink</color-swatch>
+		<color-swatch data-color="00bfff">deepskyblue</color-swatch>
+		<color-swatch data-color="696969">dimgray</color-swatch>
+		<color-swatch data-color="696969">dimgrey</color-swatch>
+		<color-swatch data-color="1e90ff">dodgerblue</color-swatch>
+		<color-swatch data-color="b22222">firebrick</color-swatch>
+		<color-swatch data-color="fffaf0">floralwhite</color-swatch>
+		<color-swatch data-color="228b22">forestgreen</color-swatch>
+		<color-swatch data-color="dcdcdc">gainsboro</color-swatch>
+		<color-swatch data-color="f8f8ff">ghostwhite</color-swatch>
+		<color-swatch data-color="ffd700">gold</color-swatch>
+		<color-swatch data-color="daa520">goldenrod</color-swatch>
+		<color-swatch data-color="adff2f">greenyellow</color-swatch>
+		<color-swatch data-color="808080">grey</color-swatch>
+		<color-swatch data-color="f0fff0">honeydew</color-swatch>
+		<color-swatch data-color="ff69b4">hotpink</color-swatch>
+		<color-swatch data-color="cd5c5c">indianred</color-swatch>
+		<color-swatch data-color="4b0082">indigo</color-swatch>
+		<color-swatch data-color="fffff0">ivory</color-swatch>
+		<color-swatch data-color="f0e68c">khaki</color-swatch>
+		<color-swatch data-color="e6e6fa">lavender</color-swatch>
+		<color-swatch data-color="fff0f5">lavenderblush</color-swatch>
+		<color-swatch data-color="7cfc00">lawngreen</color-swatch>
+		<color-swatch data-color="fffacd">lemonchiffon</color-swatch>
+		<color-swatch data-color="add8e6">lightblue</color-swatch>
+		<color-swatch data-color="f08080">lightcoral</color-swatch>
+		<color-swatch data-color="e0ffff">lightcyan</color-swatch>
+		<color-swatch data-color="fafad2">lightgoldenrodyellow</color-swatch>
+		<color-swatch data-color="d3d3d3">lightgray</color-swatch>
+		<color-swatch data-color="90ee90">lightgreen</color-swatch>
+		<color-swatch data-color="d3d3d3">lightgrey</color-swatch>
+		<color-swatch data-color="ffb6c1">lightpink</color-swatch>
+		<color-swatch data-color="ffa07a">lightsalmon</color-swatch>
+		<color-swatch data-color="20b2aa">lightseagreen</color-swatch>
+		<color-swatch data-color="87cefa">lightskyblue</color-swatch>
+		<color-swatch data-color="778899">lightslategray</color-swatch>
+		<color-swatch data-color="778899">lightslategrey</color-swatch>
+		<color-swatch data-color="b0c4de">lightsteelblue</color-swatch>
+		<color-swatch data-color="ffffe0">lightyellow</color-swatch>
+		<color-swatch data-color="32cd32">limegreen</color-swatch>
+		<color-swatch data-color="faf0e6">linen</color-swatch>
+		<color-swatch data-color="66cdaa">mediumaquamarine</color-swatch>
+		<color-swatch data-color="0000cd">mediumblue</color-swatch>
+		<color-swatch data-color="ba55d3">mediumorchid</color-swatch>
+		<color-swatch data-color="9370db">mediumpurple</color-swatch>
+		<color-swatch data-color="3cb371">mediumseagreen</color-swatch>
+		<color-swatch data-color="7b68ee">mediumslateblue</color-swatch>
+		<color-swatch data-color="00fa9a">mediumspringgreen</color-swatch>
+		<color-swatch data-color="48d1cc">mediumturquoise</color-swatch>
+		<color-swatch data-color="c71585">mediumvioletred</color-swatch>
+		<color-swatch data-color="191970">midnightblue</color-swatch>
+		<color-swatch data-color="f5fffa">mintcream</color-swatch>
+		<color-swatch data-color="ffe4e1">mistyrose</color-swatch>
+		<color-swatch data-color="ffe4b5">moccasin</color-swatch>
+		<color-swatch data-color="ffdead">navajowhite</color-swatch>
+		<color-swatch data-color="fdf5e6">oldlace</color-swatch>
+		<color-swatch data-color="6b8e23">olivedrab</color-swatch>
+		<color-swatch data-color="ff4500">orangered</color-swatch>
+		<color-swatch data-color="da70d6">orchid</color-swatch>
+		<color-swatch data-color="eee8aa">palegoldenrod</color-swatch>
+		<color-swatch data-color="98fb98">palegreen</color-swatch>
+		<color-swatch data-color="afeeee">paleturquoise</color-swatch>
+		<color-swatch data-color="db7093">palevioletred</color-swatch>
+		<color-swatch data-color="ffefd5">papayawhip</color-swatch>
+		<color-swatch data-color="ffdab9">peachpuff</color-swatch>
+		<color-swatch data-color="cd853f">peru</color-swatch>
+		<color-swatch data-color="ffc0cb">pink</color-swatch>
+		<color-swatch data-color="dda0dd">plum</color-swatch>
+		<color-swatch data-color="b0e0e6">powderblue</color-swatch>
+		<color-swatch data-color="bc8f8f">rosybrown</color-swatch>
+		<color-swatch data-color="4169e1">royalblue</color-swatch>
+		<color-swatch data-color="8b4513">saddlebrown</color-swatch>
+		<color-swatch data-color="fa8072">salmon</color-swatch>
+		<color-swatch data-color="f4a460">sandybrown</color-swatch>
+		<color-swatch data-color="2e8b57">seagreen</color-swatch>
+		<color-swatch data-color="fff5ee">seashell</color-swatch>
+		<color-swatch data-color="a0522d">sienna</color-swatch>
+		<color-swatch data-color="87ceeb">skyblue</color-swatch>
+		<color-swatch data-color="6a5acd">slateblue</color-swatch>
+		<color-swatch data-color="708090">slategray</color-swatch>
+		<color-swatch data-color="708090">slategrey</color-swatch>
+		<color-swatch data-color="fffafa">snow</color-swatch>
+		<color-swatch data-color="00ff7f">springgreen</color-swatch>
+		<color-swatch data-color="4682b4">steelblue</color-swatch>
+		<color-swatch data-color="d2b48c">tan</color-swatch>
+		<color-swatch data-color="d8bfd8">thistle</color-swatch>
+		<color-swatch data-color="ff6347">tomato</color-swatch>
+		<color-swatch data-color="40e0d0">turquoise</color-swatch>
+		<color-swatch data-color="ee82ee">violet</color-swatch>
+		<color-swatch data-color="f5deb3">wheat</color-swatch>
+		<color-swatch data-color="f5f5f5">whitesmoke</color-swatch>
+		<color-swatch data-color="9acd32">yellowgreen</color-swatch>
+		<color-swatch data-color="663399">rebeccapurple</color-swatch>
+		<footer class="footer">
+			Made with <span arial-label="love">❤</span> in Berlin by
+			<a href="https://twitter.com/iamsapegin">Artem Sapegin</a>.
+			<a href="https://github.com/sapegin/csscolors">View source on GitHub</a>.
+		</footer>
+	</body>
+</html>

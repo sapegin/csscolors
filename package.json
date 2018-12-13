@@ -1,0 +1,50 @@
+{
+  "name": "csscolors",
+  "private": true,
+  "author": {
+    "name": "Artem Sapegin",
+    "url": "http://sapegin.me"
+  },
+  "homepage": "https://github.com/sapegin/csscolors",
+  "repository": "sapegin/csscolors",
+  "license": "MIT",
+  "engines": {
+    "node": ">=6.9"
+  },
+  "main": "index.js",
+  "files": [
+    "index.js"
+  ],
+  "scripts": {
+    "start": "browser-sync start --server --files index.html",
+    "lint": "eslint \"*.html\" --cache --fix",
+    "pretest": "npm run lint:css && npm run lint",
+    "lint:css": "stylelint '**/*.html'",
+    "format": "prettier --write \"**/*.html\"",
+    "posttest": "npm run format",
+    "precommit": "lint-staged",
+    "deploy": "gh-pages -s index.html"
+  },
+  "keywords": [],
+  "dependencies": {},
+  "devDependencies": {
+    "browser-sync": "^2.26.3",
+    "eslint": "^5.10.0",
+    "eslint-config-tamia": "^6.0.2",
+    "eslint-plugin-html": "^5.0.0",
+    "gh-pages": "^2.0.1",
+    "husky": "^1.2.0",
+    "lint-staged": "^8.1.0",
+    "prettier": "^1.15.3",
+    "stylelint": "^9.9.0",
+    "stylelint-config-recommended": "^2.1.0"
+  },
+  "lint-staged": {
+    "*.html": [
+      "eslint --fix",
+      "stylelint --fix",
+      "prettier --write",
+      "git add"
+    ]
+  }
+}
