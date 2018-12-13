@@ -79,11 +79,9 @@
 
 						const template = document.getElementById('template-swatch');
 						this.shadowRoot.appendChild(template.content.cloneNode(true));
-
-						setTimeout(this.setColors.bind(this));
 					}
 
-					setColors() {
+					connectedCallback() {
 						const color = this.getAttribute('data-color');
 						const textColor = isDark(hexToRgb(color))
 							? 'var(--text-light)'
