@@ -25,7 +25,9 @@
     "precommit": "lint-staged"
   },
   "keywords": [],
-  "dependencies": {},
+  "dependencies": {
+    "color-sorter": "^4.0.1"
+  },
   "devDependencies": {
     "browser-sync": "^2.26.7",
     "eslint": "^6.8.0",
